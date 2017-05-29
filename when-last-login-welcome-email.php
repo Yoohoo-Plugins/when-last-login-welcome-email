@@ -13,6 +13,7 @@
 
 defined( 'ABSPATH' ) or exit;
 
+require('classes/class.when-last-login-email.php');
 /**
 *  Class for When Last Login Welcome Email Add-on
 */
@@ -59,13 +60,15 @@ class When_Last_Login_Welcome_Email {
 
     	$is_first_time = get_user_meta( $users->ID, 'wll_first_time', true );
 
-    	if( $is_first_time != 1 ){
+    	//if( $is_first_time != 1 ){
     		//email the current user logging in from $users
     		//send an email
+            When_Last_Login_Email_Class::sendEmail( $users->user_email );
+            //wp_mail( 'admin@admin.com', 'subject', 'hi', '', array( '' ) );
     		update_user_meta( $users->ID, 'wll_first_time', 1 );
-    	}else{
+    	//}else{
     		//do nothing - for now
-    	}
+    	//}
 
     }
 
