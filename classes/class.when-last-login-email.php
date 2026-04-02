@@ -51,12 +51,12 @@ class When_Last_Login_Email_Class {
         $footer_credit = isset( $settings['footer_credit'] ) ? $settings['footer_credit'] : "";
 
         if ( empty( $subject ) || ! $subject || $subject == "" ) {
-            $subject = sprintf( __( 'Welcome to %s', 'when-last-login-welcome-email' ), get_bloginfo( 'name' ) );
+            $subject = sprintf( __( 'Welcome to %s', 'when-last-login-welcome-email-add-on' ), get_bloginfo( 'name' ) );
         }
 
         if ( empty( $body ) || ! $body || $body == "" ) {
             // Should get this from the settings | set a default.
-            $body = __( 'Welcome to our site!', 'when-last-login-welcome-email' );
+            $body = __( 'Welcome to our site!', 'when-last-login-welcome-email-add-on' );
         }
 
         $headers = array( 'Content-Type: text/html; charset=UTF-8' );

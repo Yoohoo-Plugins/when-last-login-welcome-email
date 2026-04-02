@@ -5,12 +5,12 @@
  * Plugin URI: https://yoohooplugins.com
  * Author: YooHoo Plugins
  * Author URI: https://yoohooplugins.com
- * Version: 1.0.1
+ * Version: 1.1
  * License: GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: when-last-login-welcome-email
+ * Text Domain: when-last-login-welcome-email-add-on
  * Requires at least: 5.0
- * Tested up to: 6.7
+ * Tested up to: 6.9
  */
 
 defined( 'ABSPATH' ) or exit;
@@ -52,12 +52,12 @@ class When_Last_Login_Welcome_Email {
                 
             $body_content = "";
 
-            $body_content .= "<p>" . __( 'Hi there **name**', 'when-last-login-welcome-email' ) . "</p>" . PHP_EOL;
-            $body_content .= "<p>" . __( 'Thank you for logging in to **site_name**', 'when-last-login-welcome-email' ) . "</p>" . PHP_EOL;
-            $body_content .= "<p>" . __( 'We noticed that this was your first time logging into our site - we just wanted to send a warm welcome and let you know that if you need help with anything, please get in touch with us', 'when-last-login-welcome-email' ) . "</p>" . PHP_EOL;
+            $body_content .= "<p>" . __( 'Hi there **name**', 'when-last-login-welcome-email-add-on' ) . "</p>" . PHP_EOL;
+            $body_content .= "<p>" . __( 'Thank you for logging in to **site_name**', 'when-last-login-welcome-email-add-on' ) . "</p>" . PHP_EOL;
+            $body_content .= "<p>" . __( 'We noticed that this was your first time logging into our site - we just wanted to send a warm welcome and let you know that if you need help with anything, please get in touch with us', 'when-last-login-welcome-email-add-on' ) . "</p>" . PHP_EOL;
 
             $settings = array(
-                'subject' => __( 'Welcome to ', 'when-last-login-welcome-email' ) . get_bloginfo( 'name' ),
+                'subject' => __( 'Welcome to ', 'when-last-login-welcome-email-add-on' ) . get_bloginfo( 'name' ),
                 'logo' => '',
                 'body' => $body_content,
                 'footer_credit' => '<a href="' . get_option( 'siteurl' ) . '">' . get_bloginfo( 'name' ) . '</a>'
@@ -73,7 +73,7 @@ class When_Last_Login_Welcome_Email {
         if ( isset( $_GET['tab'] ) && $_GET['tab'] == 'welcome-emails' ) {
             wp_enqueue_script( 'jquery' );
             wp_enqueue_media();
-            wp_enqueue_script( 'wll-we-admin-script', plugins_url( '/js/admin.js', __FILE__ ), array( 'jquery' ), '1.0.1', true );
+            wp_enqueue_script( 'wll-we-admin-script', plugins_url( '/js/admin.js', __FILE__ ), array( 'jquery' ), '1.1', true );
         }
 
     }
@@ -113,7 +113,7 @@ class When_Last_Login_Welcome_Email {
     public function wll_we_settings_tab( $array ){
 
         $array['welcome-emails'] = array(
-            'title' => __( 'Welcome Emails', 'when-last-login-welcome-email' ),
+            'title' => __( 'Welcome Emails', 'when-last-login-welcome-email-add-on' ),
             'icon' => ''
         );
 
@@ -161,7 +161,7 @@ class When_Last_Login_Welcome_Email {
 
         if ( $updated ) {
             add_action( 'admin_notices', function() {
-                echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Settings successfully updated', 'when-last-login-welcome-email' ) . '</p></div>';
+                echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Settings successfully updated', 'when-last-login-welcome-email-add-on' ) . '</p></div>';
             } );
         }
 
