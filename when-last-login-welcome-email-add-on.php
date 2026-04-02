@@ -2,15 +2,13 @@
 /**
  * Plugin Name: When Last Login - Welcome Email Add-on
  * Description: Send an HTML welcome email when a user logs in for the first time.
- * Plugin URI: https://yoohooplugins.com
- * Author: YooHoo Plugins
+ * Plugin URI: https://whenlastlogin.com
+ * Author: Yoohoo Plugins
  * Author URI: https://yoohooplugins.com
  * Version: 1.1.1
  * License: GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: when-last-login-welcome-email-add-on
- * Requires at least: 5.0
- * Tested up to: 6.9
  */
 
 defined( 'ABSPATH' ) or exit;
