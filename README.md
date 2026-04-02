@@ -1,6 +1,6 @@
 ![](when-last-login-welcome-email-banner.jpg)
 
-# [When Last Login - Welcome Email Add-on](https://yoohooplugins.com/plugins/when-last-login-welcome-email/)
+# [When Last Login - Welcome Email Add On](https://yoohooplugins.com/plugins/when-last-login-welcome-email/)
 ![License](https://img.shields.io/badge/license-GPL--2.0%2B-blue.svg?style=flat-square)
 
 ## Welcome to the When Last Login - Welcome Email GitHub Repository
