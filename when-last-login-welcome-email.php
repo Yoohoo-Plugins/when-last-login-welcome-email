@@ -5,15 +5,18 @@
  * Plugin URI: https://yoohooplugins.com
  * Author: YooHoo Plugins
  * Author URI: https://yoohooplugins.com
- * Version: 1.0
+ * Version: 1.0.1
  * License: GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: when-last-login-welcome-email
+ * Requires at least: 5.0
+ * Tested up to: 6.7
  */
 
 defined( 'ABSPATH' ) or exit;
 
-require('classes/class.when-last-login-email.php');
+require_once( 'classes/class.when-last-login-email.php' );
+
 /**
 *  Class for When Last Login Welcome Email Add-on
 */
@@ -30,10 +33,11 @@ class When_Last_Login_Welcome_Email {
 
     	add_action( 'init', array( $this, 'init' ) );
 
+    	// Note: wp_login hook is deprecated but kept for backwards compatibility
     	add_action( 'wp_login', array( $this, 'check_if_user_first_time' ), 10, 2 );
         add_filter( 'wll_settings_page_tabs', array( $this, 'wll_we_settings_tab' ) );
         add_filter( 'wll_settings_page_content', array( $this, 'wll_we_settings_content' ) );
-        add_action( 'admin_head', array( $this, 'wll_we_save_settings') );
+        add_action( 'admin_init', array( $this, 'wll_we_save_settings' ) );
         add_action( 'admin_enqueue_scripts', array( $this, 'wll_we_admin_scripts' ) );
 
         register_activation_hook( __FILE__, array( $this, 'wll_we_activate' ) );
@@ -44,19 +48,19 @@ class When_Last_Login_Welcome_Email {
 
         $current_settings = get_option( 'wll_we_settings' );
 
-        if( !$current_settings || $current_settings == "" || !is_array( $current_settings ) ){
+        if ( ! $current_settings || $current_settings == "" || ! is_array( $current_settings ) ) {
                 
             $body_content = "";
 
-            $body_content .= "<p>".__('Hi there **name**', 'when-last-login-welcome-email')."</p>".PHP_EOL;
-            $body_content .= "<p>".__('Thank you for logging in to **site_name**', 'when-last-login-welcome-email')."</p>".PHP_EOL;
-            $body_content .= "<p>".__('We noticed that this was your first time logging into our site - we just wanted to send a warm welcome and let you know that if you need help with anything, please get in touch with us', 'when-last-login-welcome-email')."</p>".PHP_EOL;
+            $body_content .= "<p>" . __( 'Hi there **name**', 'when-last-login-welcome-email' ) . "</p>" . PHP_EOL;
+            $body_content .= "<p>" . __( 'Thank you for logging in to **site_name**', 'when-last-login-welcome-email' ) . "</p>" . PHP_EOL;
+            $body_content .= "<p>" . __( 'We noticed that this was your first time logging into our site - we just wanted to send a warm welcome and let you know that if you need help with anything, please get in touch with us', 'when-last-login-welcome-email' ) . "</p>" . PHP_EOL;
 
             $settings = array(
-                'subject' => __('Welcome to ', 'when-last-login-welcome-email').get_bloginfo( 'name' ),
+                'subject' => __( 'Welcome to ', 'when-last-login-welcome-email' ) . get_bloginfo( 'name' ),
                 'logo' => '',
                 'body' => $body_content,
-                'footer_credit' => '<a href="'.get_option('siteurl').'">'.get_bloginfo( 'name' ).'</a>'
+                'footer_credit' => '<a href="' . get_option( 'siteurl' ) . '">' . get_bloginfo( 'name' ) . '</a>'
             );
 
             update_option( 'wll_we_settings', $settings );
@@ -66,10 +70,10 @@ class When_Last_Login_Welcome_Email {
 
     public function wll_we_admin_scripts(){
 
-        if( isset( $_GET['tab'] ) && $_GET['tab'] == 'welcome-emails' ){
+        if ( isset( $_GET['tab'] ) && $_GET['tab'] == 'welcome-emails' ) {
             wp_enqueue_script( 'jquery' );
             wp_enqueue_media();
-            wp_enqueue_script( 'wll-we-admin-script', plugins_url( '/js/admin.js', __FILE__ ) );
+            wp_enqueue_script( 'wll-we-admin-script', plugins_url( '/js/admin.js', __FILE__ ), array( 'jquery' ), '1.0.1', true );
         }
 
     }
@@ -77,7 +81,7 @@ class When_Last_Login_Welcome_Email {
     /**
      * Creates or returns an instance of this class.
      *
-     * @return  When_Last_Login A single instance of this class.
+     * @return  When_Last_Login_Welcome_Email A single instance of this class.
      */
     public static function get_instance() {
         if ( null == self::$instance ) {
@@ -96,7 +100,7 @@ class When_Last_Login_Welcome_Email {
 
     	$is_first_time = get_user_meta( $users->ID, 'wll_we_first_time', true );
 
-        if( $is_first_time == '' ){
+        if ( $is_first_time == '' ) {
 
             When_Last_Login_Email_Class::sendEmail( $users );
 
@@ -109,7 +113,7 @@ class When_Last_Login_Welcome_Email {
     public function wll_we_settings_tab( $array ){
 
         $array['welcome-emails'] = array(
-            'title' => __('Welcome Emails', 'when-last-login-email'),
+            'title' => __( 'Welcome Emails', 'when-last-login-welcome-email' ),
             'icon' => ''
         );
 
@@ -119,7 +123,7 @@ class When_Last_Login_Welcome_Email {
 
     public function wll_we_settings_content( $content ){
 
-        $content['welcome-emails'] = plugin_dir_path( __FILE__ ).'/when-last-login-welcome-email-settings.php';
+        $content['welcome-emails'] = plugin_dir_path( __FILE__ ) . '/when-last-login-welcome-email-settings.php';
 
         return $content;
 
@@ -127,26 +131,38 @@ class When_Last_Login_Welcome_Email {
 
     public function wll_we_save_settings(){
 
-        if( isset( $_POST['wll_we_save_settings'] ) ){
+        if ( ! isset( $_POST['wll_we_save_settings'] ) ) {
+            return;
+        }
 
-            $subject = isset( $_POST['wll_we_subject'] ) ? sanitize_text_field( $_POST['wll_we_subject'] ) : "";
-            $body = isset( $_POST['wll_we_body'] ) ? nl2br( $_POST['wll_we_body'] ) : "";
-            $logo = isset( $_POST['wll_we_logo'] ) ? sanitize_text_field( $_POST['wll_we_logo'] ) : "";
-            $footer_credit = isset( $_POST['wll_we_footer_credit'] ) ? $_POST['wll_we_footer_credit'] : "";
+        // Verify nonce for security
+        if ( ! isset( $_POST['wll_we_settings_nonce'] ) || ! wp_verify_nonce( $_POST['wll_we_settings_nonce'], 'wll_we_settings_save' ) ) {
+            return;
+        }
 
-            $settings = array(
-                'subject' => $subject,
-                'body' => $body,
-                'logo' => $logo,
-                'footer_credit' => $footer_credit
-            );
+        // Check user capabilities
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return;
+        }
 
-            $updated = update_option( 'wll_we_settings', $settings );
+        $subject = isset( $_POST['wll_we_subject'] ) ? sanitize_text_field( $_POST['wll_we_subject'] ) : "";
+        $body = isset( $_POST['wll_we_body'] ) ? wp_kses_post( $_POST['wll_we_body'] ) : "";
+        $logo = isset( $_POST['wll_we_logo'] ) ? esc_url_raw( $_POST['wll_we_logo'] ) : "";
+        $footer_credit = isset( $_POST['wll_we_footer_credit'] ) ? wp_kses_post( $_POST['wll_we_footer_credit'] ) : "";
 
-            if( $updated ){
-                echo "<div class='updated'><p>".__('Settings successfully updated', 'when-last-login-welcome-email')."</p></div>";
-            }
+        $settings = array(
+            'subject' => $subject,
+            'body' => $body,
+            'logo' => $logo,
+            'footer_credit' => $footer_credit
+        );
 
+        $updated = update_option( 'wll_we_settings', $settings );
+
+        if ( $updated ) {
+            add_action( 'admin_notices', function() {
+                echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Settings successfully updated', 'when-last-login-welcome-email' ) . '</p></div>';
+            } );
         }
 
     }
@@ -155,6 +171,3 @@ class When_Last_Login_Welcome_Email {
 } //end of class
 
 When_Last_Login_Welcome_Email::get_instance();
-
-
-

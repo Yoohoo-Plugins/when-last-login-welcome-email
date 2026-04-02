@@ -2,9 +2,9 @@
 Contributors: andrewza, yoohooplugins, travislima
 Tags: last login, welcome email, first time login, login email, first time user
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4GC4JEZH7KSKL
-Requires at least: 4.0
-Tested up to: 4.7.5
-Stable tag: trunk
+Requires at least: 5.0
+Tested up to: 6.7
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,16 @@ Yes, When Last Login - User Email is a free plugin for WordPress.
 None applicable
 
 == Changelog ==
+
+= 1.0.1 =
+* Security: Added nonce verification for settings save
+* Security: Added proper output escaping in settings page
+* Security: Added capability check for settings save
+* Fixed: Removed duplicate empty class file
+* Fixed: Fixed broken HTML button tag in settings page
+* Fixed: Consistent text domain usage throughout plugin
+* Updated: Tested up to WordPress 6.7
+* Updated: Requires at least WordPress 5.0
 
 = 1.0 =
 * First Release
