@@ -5,7 +5,7 @@
  * Plugin URI: https://yoohooplugins.com
  * Author: YooHoo Plugins
  * Author URI: https://yoohooplugins.com
- * Version: 1.1
+ * Version: 1.1.1
  * License: GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: when-last-login-welcome-email-add-on
@@ -49,7 +49,8 @@ class When_Last_Login_Welcome_Email {
     }
 
     public function wll_we_admin_scripts( $hook ) {
-        if ( ! isset( $_GET['tab'] ) || 'welcome-emails' !== $_GET['tab'] ) {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Tab parameter is read-only, no form data processed.
+        if ( ! isset( $_GET['tab'] ) || 'welcome-emails' !== sanitize_key( $_GET['tab'] ) ) {
             return;
         }
         wp_enqueue_script( 'jquery' );
@@ -91,7 +92,7 @@ class When_Last_Login_Welcome_Email {
             return;
         }
 
-        if ( ! isset( $_POST['wll_we_settings_nonce'] ) || ! wp_verify_nonce( $_POST['wll_we_settings_nonce'], 'wll_we_settings_save' ) ) {
+        if ( ! isset( $_POST['wll_we_settings_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wll_we_settings_nonce'] ) ), 'wll_we_settings_save' ) ) {
             return;
         }
 

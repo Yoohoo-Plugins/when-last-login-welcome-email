@@ -57,15 +57,5 @@ None applicable
 * Updated: Tested up to WordPress 6.9
 * Updated: Requires at least WordPress 5.0
 
-= 1.0.1 =
-* Security: Added nonce verification for settings save
-* Security: Added proper output escaping in settings page
-* Security: Added capability check for settings save
-* Fixed: Removed duplicate empty class file
-* Fixed: Fixed broken HTML button tag in settings page
-* Fixed: Consistent text domain usage throughout plugin
-* Updated: Tested up to WordPress 6.7
-* Updated: Requires at least WordPress 5.0
-
 = 1.0 =
 * First Release

@@ -2,16 +2,16 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$settings = When_Last_Login_Welcome_Email::get_settings();
+$wll_we_settings = When_Last_Login_Welcome_Email::get_settings();
 
-$subject = isset( $settings['subject'] ) ? stripslashes( $settings['subject'] ) : "";
-$body = isset( $settings['body'] ) ? stripslashes( $settings['body'] ) : "";
-$logo = isset( $settings['logo'] ) ? stripslashes( $settings['logo'] ) : "";
-$footer_credit = isset( $settings['footer_credit'] ) ? stripslashes( $settings['footer_credit'] ) : "";
+$wll_we_subject = isset( $wll_we_settings['subject'] ) ? stripslashes( $wll_we_settings['subject'] ) : "";
+$wll_we_body = isset( $wll_we_settings['body'] ) ? stripslashes( $wll_we_settings['body'] ) : "";
+$wll_we_logo = isset( $wll_we_settings['logo'] ) ? stripslashes( $wll_we_settings['logo'] ) : "";
+$wll_we_footer_credit = isset( $wll_we_settings['footer_credit'] ) ? stripslashes( $wll_we_settings['footer_credit'] ) : "";
 
 // Check for saved success message
-$saved_successfully = get_transient( 'wll_we_settings_saved' );
-if ( $saved_successfully ) {
+$wll_we_saved_successfully = get_transient( 'wll_we_settings_saved' );
+if ( $wll_we_saved_successfully ) {
     delete_transient( 'wll_we_settings_saved' );
 }
 ?>
@@ -21,7 +21,7 @@ if ( $saved_successfully ) {
         <p class="description">
             <?php echo esc_html__( 'Sends a welcome email to users on their very first login to your site.', 'when-last-login-welcome-email' ); ?>
         </p>
-        <?php if ( $saved_successfully ) : ?>
+        <?php if ( $wll_we_saved_successfully ) : ?>
             <div class="notice notice-success is-dismissible inline" style="margin: 10px 0;">
                 <p><?php echo esc_html__( 'Settings saved successfully!', 'when-last-login-welcome-email' ); ?></p>
             </div>
@@ -31,20 +31,20 @@ if ( $saved_successfully ) {
 <tr>
     <th><?php esc_html_e( 'Welcome Email Subject', 'when-last-login-welcome-email-add-on' ); ?></th>
     <td>
-        <input type="text" style="width: 300px;" name="wll_we_subject" value="<?php echo esc_attr( $subject ); ?>" />
+        <input type="text" style="width: 300px;" name="wll_we_subject" value="<?php echo esc_attr( $wll_we_subject ); ?>" />
     </td>
 </tr>
 <tr>
     <th><?php esc_html_e( 'Welcome Email Logo', 'when-last-login-welcome-email-add-on' ); ?></th>
     <td>
-        <input type="text" style="width: 300px;" name="wll_we_logo" id="wll_we_logo" value="<?php echo esc_url( $logo ); ?>" />
+        <input type="text" style="width: 300px;" name="wll_we_logo" id="wll_we_logo" value="<?php echo esc_url( $wll_we_logo ); ?>" />
         <button class="button" id="wll_we_upload_media"><?php esc_html_e( 'Upload Logo', 'when-last-login-welcome-email-add-on' ); ?></button>
     </td>
 </tr>
 <tr>
     <th><?php esc_html_e( 'Welcome Email Body', 'when-last-login-welcome-email-add-on' ); ?></th>
     <td>
-        <textarea name="wll_we_body" rows="7" style="width: 50%"><?php echo esc_textarea( $body ); ?></textarea>
+        <textarea name="wll_we_body" rows="7" style="width: 50%"><?php echo esc_textarea( $wll_we_body ); ?></textarea>
         <small class="description">
             <p><?php esc_html_e( 'The following tags can be used: ', 'when-last-login-welcome-email-add-on' ); ?></p>
             <code>**name**</code><code>**site_name**</code><code>**website_name**</code><code>**mail_subject**</code><code>**footer_credit**</code>
@@ -54,7 +54,7 @@ if ( $saved_successfully ) {
 <tr>
     <th><?php esc_html_e( 'Welcome Email Footer Credit', 'when-last-login-welcome-email-add-on' ); ?></th>
     <td>
-        <input type="text" style="width: 300px;" name="wll_we_footer_credit" value="<?php echo esc_attr( $footer_credit ); ?>" />
+        <input type="text" style="width: 300px;" name="wll_we_footer_credit" value="<?php echo esc_attr( $wll_we_footer_credit ); ?>" />
     </td>
 </tr>
 <tr>
