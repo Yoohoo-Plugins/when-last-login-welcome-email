@@ -157,13 +157,10 @@ class When_Last_Login_Welcome_Email {
             'footer_credit' => $footer_credit
         );
 
-        $updated = update_option( 'wll_we_settings', $settings );
+        update_option( 'wll_we_settings', $settings );
 
-        if ( $updated ) {
-            add_action( 'admin_notices', function() {
-                echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Settings successfully updated', 'when-last-login-welcome-email' ) . '</p></div>';
-            } );
-        }
+        // Set transient to show success message on next page load
+        set_transient( 'wll_we_settings_saved', true, 30 );
 
     }
 

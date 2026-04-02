@@ -15,10 +15,24 @@ $subject = isset( $settings['subject'] ) ? stripslashes( $settings['subject'] ) 
 $body = isset( $settings['body'] ) ? stripslashes( $settings['body'] ) : "";
 $logo = isset( $settings['logo'] ) ? stripslashes( $settings['logo'] ) : "";
 $footer_credit = isset( $settings['footer_credit'] ) ? stripslashes( $settings['footer_credit'] ) : "";
+
+// Check for saved success message
+$saved_successfully = get_transient( 'wll_we_settings_saved' );
+if ( $saved_successfully ) {
+    delete_transient( 'wll_we_settings_saved' );
+}
 ?>
 <tr>
     <th colspan='2'>
         <h2><?php echo esc_html__( 'When Last Login - Welcome Email Settings', 'when-last-login-welcome-email' ); ?></h2>
+        <p class="description">
+            <?php echo esc_html__( 'Sends a welcome email to users on their very first login to your site.', 'when-last-login-welcome-email' ); ?>
+        </p>
+        <?php if ( $saved_successfully ) : ?>
+            <div class="notice notice-success is-dismissible inline" style="margin: 10px 0;">
+                <p><?php echo esc_html__( 'Settings saved successfully!', 'when-last-login-welcome-email' ); ?></p>
+            </div>
+        <?php endif; ?>
     </th>
 </tr>
 <tr>
