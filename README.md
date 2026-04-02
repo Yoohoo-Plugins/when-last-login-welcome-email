@@ -5,7 +5,7 @@
 
 ## Welcome to the When Last Login - Welcome Email GitHub Repository
 
-[When Last Login - Welcome Email](https://yoohooplugins.com/plugins/when-last-login-welcome-email/) extends the When Last Login plugin by sending a customizable HTML welcome email to users when they log in for the first time.
+[When Last Login - Welcome Email](https://wordpress.org/plugins/when-last-login-welcome-email-add-on) extends the When Last Login plugin by sending a customizable HTML welcome email to users when they log in for the first time.
 
 Customize the email subject, body content, logo, and footer credits. Use shortcode tags to personalize messages with the user's name and site details.
 
@@ -33,7 +33,6 @@ Customize the email subject, body content, logo, and footer credits. Use shortco
 - PHP 7.4 or higher
 - [When Last Login](https://wordpress.org/plugins/when-last-login/) plugin (version 1.0.0 or higher)
 
-
 ## Bugs
 
 If you find an issue, let us know by [creating a detailed GitHub issue](https://github.com/Yoohoo-Plugins/when-last-login-welcome-email/issues/new).
@@ -50,7 +49,7 @@ We welcome contributions! Please read the [guidelines for contributing](https://
 
 1. Report [bugs/issues](https://github.com/Yoohoo-Plugins/when-last-login-welcome-email/issues) on GitHub.
 2. Submit pull requests for bug fixes or features.
-3. Purchase any license key to continue funding development - https://yoohooplugins.com/plugins/when-last-login-welcome-email
+3. [Purchase any license key to continue funding development](https://yoohooplugins.com/plugins/)
 4. [Leave an honest review](https://wordpress.org/plugins/when-last-login-welcome-email-add-on/#reviews)
 
 ## License
