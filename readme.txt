@@ -1,4 +1,4 @@
-=== When Last Login - Welcome Email ===
+=== When Last Login - Welcome Email Add-on ===
 Contributors: andrewza, yoohooplugins, travislima
 Tags: last login, welcome email, first time login, login email, first time user
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4GC4JEZH7KSKL
