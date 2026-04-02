@@ -5,7 +5,7 @@
  * Plugin URI: https://whenlastlogin.com
  * Author: Yoohoo Plugins
  * Author URI: https://yoohooplugins.com
- * Version: 1.1.1
+ * Version: 1.1
  * License: GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: when-last-login-welcome-email-add-on
