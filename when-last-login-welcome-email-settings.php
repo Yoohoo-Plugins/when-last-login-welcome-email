@@ -17,13 +17,13 @@ if ( $wll_we_saved_successfully ) {
 ?>
 <tr>
     <th colspan='2'>
-        <h2><?php echo esc_html__( 'When Last Login - Welcome Email Settings', 'when-last-login-welcome-email' ); ?></h2>
+        <h2><?php echo esc_html__( 'When Last Login - Welcome Email Settings', 'when-last-login-welcome-email-add-on' ); ?></h2>
         <p class="description">
-            <?php echo esc_html__( 'Sends a welcome email to users on their very first login to your site.', 'when-last-login-welcome-email' ); ?>
+            <?php echo esc_html__( 'Sends a welcome email to users on their very first login to your site.', 'when-last-login-welcome-email-add-on' ); ?>
         </p>
         <?php if ( $wll_we_saved_successfully ) : ?>
             <div class="notice notice-success is-dismissible inline" style="margin: 10px 0;">
-                <p><?php echo esc_html__( 'Settings saved successfully!', 'when-last-login-welcome-email' ); ?></p>
+                <p><?php echo esc_html__( 'Settings saved successfully!', 'when-last-login-welcome-email-add-on' ); ?></p>
             </div>
         <?php endif; ?>
     </th>
