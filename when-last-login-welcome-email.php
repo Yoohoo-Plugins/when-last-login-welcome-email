@@ -107,6 +107,9 @@ class When_Last_Login_Welcome_Email {
         );
 
         update_option( 'wll_we_settings', $settings );
+
+        // Set transient to show success message on next page load
+        set_transient( 'wll_we_settings_saved', true, 30 );
     }
 }
 
