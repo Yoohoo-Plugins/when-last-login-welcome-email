@@ -24,18 +24,18 @@ class When_Last_Login_Email_Class {
 
         $settings = When_Last_Login_Welcome_Email::get_settings();
 
-        $subject = $settings['subject'];
-        $body = $settings['body'];
-        $logo = $settings['logo'];
-        $footer_credit = $settings['footer_credit'];
+        $subject = $settings['subject'] ?? '';
+        $body = $settings['body'] ?? '';
+        $logo = $settings['logo'] ?? '';
+        $footer_credit = $settings['footer_credit'] ?? '';
 
         $headers = array( 'Content-Type: text/html; charset=UTF-8' );
         $headers = apply_filters( 'wll_we_mail_headers', $headers );
 
-        $attachments = apply_filters( 'wll_we_mail_attachments', null );
+        $attachments = apply_filters( 'wll_we_mail_attachments', array() );
 
         $available_tags = array(
-            '**name**' => $name,
+            '**name**' => $name ?? '',
             '**site_name**' => $fromname,
             '**website_name**' => $fromname,
             '**mail_subject**' => $subject,
@@ -44,7 +44,7 @@ class When_Last_Login_Email_Class {
         );
 
         foreach ( $available_tags as $key => $val ) {
-            $body = str_replace( $key, $val, $body );
+            $body = str_replace( $key, (string) $val, $body );
         }
 
         $available_tags['**mail_body**'] = $body;
@@ -64,11 +64,15 @@ class When_Last_Login_Email_Class {
 
         $data = file_get_contents( $template_path );
 
-        foreach ( $available_tags as $key => $val ) {
-            $data = str_replace( $key, $val, $data );
+        if ( ! $data ) {
+            return '';
         }
 
-        $data = str_replace( '**stylesheet_url**', plugins_url( 'css/app.css', dirname( __FILE__ ) . '/when-last-login-welcome-email.php' ), $data );
+        foreach ( $available_tags as $key => $val ) {
+            $data = str_replace( $key, (string) $val, $data );
+        }
+
+        $data = str_replace( '**stylesheet_url**', plugins_url( 'css/app.css', dirname( __DIR__ ) . '/when-last-login-welcome-email.php' ), $data );
 
         return $data;
     }

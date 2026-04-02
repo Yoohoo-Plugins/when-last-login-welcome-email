@@ -65,17 +65,17 @@ class When_Last_Login_Welcome_Email {
     }
 
     public function check_if_user_first_time( $user_login, $user ) {
-        $is_first_time = get_user_meta( $user->ID, 'wll_we_first_time', true );
-
-        if ( '' === $is_first_time ) {
-            When_Last_Login_Email_Class::sendEmail( $user );
-            update_user_meta( $user->ID, 'wll_we_first_time', 0 );
+        if ( get_user_meta( $user->ID, 'wll_we_sent_first_email', true ) ) {
+            return;
         }
+
+        When_Last_Login_Email_Class::sendEmail( $user );
+        update_user_meta( $user->ID, 'wll_we_sent_first_email', 1 );
     }
 
     public function wll_we_settings_tab( $tabs ) {
         $tabs['welcome-emails'] = array(
-            'title' => __( 'Welcome Emails', 'when-last-login-welcome-email-add-on' ),
+            'title' => __( 'Welcome Email', 'when-last-login-welcome-email-add-on' ),
             'icon' => ''
         );
         return $tabs;
