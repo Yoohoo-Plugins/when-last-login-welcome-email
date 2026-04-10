@@ -3,7 +3,7 @@
 # [When Last Login - Welcome Email Add On](https://yoohooplugins.com/plugins/when-last-login-welcome-email/)
 ![License](https://img.shields.io/badge/license-GPL--2.0%2B-blue.svg?style=flat-square)
 
-## Welcome to the When Last Login - Welcome Email GitHub Repository
+## Welcome to the When Last Login - Welcome Email Add On GitHub Repository
 
 [When Last Login - Welcome Email](https://wordpress.org/plugins/when-last-login-welcome-email-add-on) extends the When Last Login plugin by sending a customizable HTML welcome email to users when they log in for the first time.
 
