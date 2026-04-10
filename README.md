@@ -39,7 +39,7 @@ If you find an issue, let us know by [creating a detailed GitHub issue](https://
 
 ## Support
 
-This is a developer's portal for When Last Login - Welcome Email. For support, please visit [yoohooplugins.com/support](https://yoohooplugins.com/support/).
+This is a developer's portal for When Last Login - Welcome Email Add On. For support, please visit [yoohooplugins.com/support](https://yoohooplugins.com/support/).
 
 ## Contributing
 
